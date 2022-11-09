@@ -8,6 +8,7 @@ import Button from "./Button"
 import IconButton from "./IconButton"
 
 import { getVoteDistribution } from "../utils/votes"
+import classNames from "classnames"
 
 dayjs.extend(relativeTime)
 
@@ -15,6 +16,7 @@ type VotingCardProps = {
   person: Person
   onVote: (id: string, category: "positive" | "negative") => void
   onVoteAgain: (id: string) => void
+  disabled?: boolean
   alreadyVoted: boolean
 }
 
@@ -22,6 +24,7 @@ function VotingCard({
   person,
   onVote,
   onVoteAgain,
+  disabled = false,
   alreadyVoted,
 }: VotingCardProps) {
   const voteDistribution = useMemo(
@@ -62,16 +65,22 @@ function VotingCard({
                 </>
               )}
             </small>
-            <div className="voting-card__information-button-group">
+            <div
+              className={classNames("voting-card__information-button-group", {
+                disabled,
+              })}
+            >
               {!alreadyVoted && (
                 <>
                   <IconButton
                     category="up"
                     onClick={() => onVote(person.id, "positive")}
+                    disabled={disabled}
                   />
                   <IconButton
                     category="down"
                     onClick={() => onVote(person.id, "negative")}
+                    disabled={disabled}
                   />
                 </>
               )}
