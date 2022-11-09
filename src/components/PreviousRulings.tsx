@@ -1,21 +1,12 @@
 import classNames from "classnames"
 import { useState } from "react"
-import DropdownSelector, { DropdownOption } from "./DropdownSelector"
 
+import DropdownSelector, { DropdownOption } from "./DropdownSelector"
 import VotingCard from "./VotingCard"
 
-const person = {
-  name: "Kanye West",
-  description:
-    "Born in Atlanta and raised in Chicago, West was first known as a producer for Roc-A-Fella Records in the early 2000s, producing singles for several mainstream artists.",
-  category: "entertainment",
-  picture: "/assets/img/kanye.png",
-  lastUpdated: "2020-03-10T23:08:57.892Z",
-  votes: {
-    positive: 23,
-    negative: 36,
-  },
-}
+import usePeople from "../hooks/usePeople"
+import InfoBox from "./InfoBox"
+import Loader from "./Loader"
 
 const DROPDOWN_OPTIONS: { [key: string]: DropdownOption } = {
   list: {
@@ -29,6 +20,11 @@ const DROPDOWN_OPTIONS: { [key: string]: DropdownOption } = {
 }
 
 function PreviousRulings() {
+  const { people, isLoading, isError, vote, refetch } = usePeople()
+
+  const [alreadyVoted, setAlreadyVoted] = useState<{
+    [key: string]: boolean | undefined
+  }>({})
   const [display, setDisplay] = useState<DropdownOption>(DROPDOWN_OPTIONS.list)
 
   return (
@@ -41,8 +37,35 @@ function PreviousRulings() {
           onSelect={setDisplay}
         />
       </div>
+      {isLoading && <Loader />}
+      {isError && (
+        <InfoBox type="error">
+          Something went wrong, please try again later!
+        </InfoBox>
+      )}
       <div className={classNames("rulings__carousel", display.value)}>
-        <VotingCard person={person} />
+        {people &&
+          people.map((person) => (
+            <VotingCard
+              key={person.id}
+              person={person}
+              onVote={(id, category) => {
+                vote(
+                  { id, category },
+                  {
+                    onSuccess: () => {
+                      setAlreadyVoted({ ...alreadyVoted, [id]: true })
+                      refetch()
+                    },
+                  }
+                )
+              }}
+              onVoteAgain={(id) => {
+                setAlreadyVoted({ ...alreadyVoted, [id]: undefined })
+              }}
+              alreadyVoted={Boolean(alreadyVoted[person.id])}
+            />
+          ))}
       </div>
     </div>
   )
