@@ -3,7 +3,7 @@ name: Test
 on: pull_request
 
 jobs:
-  test:
+  test_pull_request:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,6 +15,9 @@ jobs:
 
       - name: Lint
         run: yarn lint
+
+      - name: Test
+        run: yarn test
 
       - name: Build
         run: yarn build
