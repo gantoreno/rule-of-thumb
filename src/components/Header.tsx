@@ -1,3 +1,5 @@
+import IconButton from "./IconButton"
+
 function Header() {
   return (
     <header className="hero">
@@ -39,22 +41,8 @@ function Header() {
             </p>
             <p className="featured-card__cta">What&apos;s Your Veredict?</p>
             <div className="featured-card__buttons">
-              <button className="icon-button" aria-label="thumbs up">
-                <img
-                  src="/assets/img/thumbs-up.svg"
-                  alt="thumbs up"
-                  width={16}
-                  height={16}
-                />
-              </button>
-              <button className="icon-button" aria-label="thumbs down">
-                <img
-                  src="/assets/img/thumbs-down.svg"
-                  alt="thumbs down"
-                  width={16}
-                  height={16}
-                />
-              </button>
+              <IconButton category="up" />
+              <IconButton category="down" />
             </div>
           </div>
         </div>

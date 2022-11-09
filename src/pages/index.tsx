@@ -1,7 +1,9 @@
 import Head from "next/head"
+
 import Footer from "../components/Footer"
 import Header from "../components/Header"
 import Navbar from "../components/Navbar"
+import PreviousRulings from "../components/PreviousRulings"
 import PromotionalBanner from "../components/PromotionalBanner"
 import Separator from "../components/Separator"
 import SubmissionBanner from "../components/SubmissionBanner"
@@ -16,7 +18,9 @@ function IndexPage() {
       <Header />
       <div className="max-centered">
         <PromotionalBanner />
-        <main role="main">{/* code goes here */}</main>
+        <main role="main">
+          <PreviousRulings />
+        </main>
         <SubmissionBanner />
         <Separator />
         <Footer />
