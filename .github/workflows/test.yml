@@ -1,0 +1,21 @@
+name: Test
+
+on: pull_request
+
+jobs:
+  test:
+    build:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout
+          uses: actions/checkout@master
+
+        - name: Install
+          run: yarn install
+
+        - name: Lint
+          run: yarn lint
+
+        - name: Build
+          run: yarn build
