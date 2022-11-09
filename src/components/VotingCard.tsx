@@ -2,7 +2,7 @@
 import { Person } from "@prisma/client"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 
 import Button from "./Button"
 import IconButton from "./IconButton"
@@ -27,6 +27,10 @@ function VotingCard({
   disabled = false,
   alreadyVoted,
 }: VotingCardProps) {
+  const [selectedOption, setSelectedOption] = useState<
+    null | "positive" | "negative"
+  >(null)
+
   const voteDistribution = useMemo(
     () => getVoteDistribution(person.positiveVotes, person.negativeVotes),
     [person]
@@ -74,19 +78,36 @@ function VotingCard({
                 <>
                   <IconButton
                     category="up"
-                    onClick={() => onVote(person.id, "positive")}
+                    className={classNames({
+                      focused: selectedOption === "positive",
+                    })}
+                    onClick={() => setSelectedOption("positive")}
                     disabled={disabled}
                   />
                   <IconButton
                     category="down"
-                    onClick={() => onVote(person.id, "negative")}
+                    className={classNames({
+                      focused: selectedOption === "negative",
+                    })}
+                    onClick={() => setSelectedOption("negative")}
                     disabled={disabled}
                   />
                 </>
               )}
               <Button
-                onClick={() => onVoteAgain(person.id)}
-                disabled={!alreadyVoted}
+                onClick={() => {
+                  if (alreadyVoted) {
+                    setSelectedOption(null)
+                    onVoteAgain(person.id)
+                    return
+                  }
+
+                  if (selectedOption) {
+                    onVote(person.id, selectedOption)
+                    return
+                  }
+                }}
+                disabled={!alreadyVoted && !selectedOption}
               >
                 {alreadyVoted ? "Vote Again" : "Vote Now"}
               </Button>

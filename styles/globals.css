@@ -60,6 +60,7 @@ hr[role="separator"] {
 
 .button:disabled {
   cursor: initial;
+  opacity: 0.6;
 }
 
 .nav {
@@ -644,7 +645,7 @@ main h2 {
 }
 
 .voting-card .voting-card__information-button-group.disabled {
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 .voting-card .voting-card__information-button-group .icon-button {
@@ -655,6 +656,10 @@ main h2 {
   width: 30px;
   height: 30px;
   aspect-ratio: 1;
+}
+
+.voting-card .icon-button.focused {
+  border: 2px solid var(--color-white);
 }
 
 .voting-card .icon-button > img {
