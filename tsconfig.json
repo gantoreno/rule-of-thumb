@@ -23,5 +23,5 @@
     "prisma/seeds/initialSeed.js",
     "jest.config.js"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "cypress", "cypress.config.ts"]
 }
