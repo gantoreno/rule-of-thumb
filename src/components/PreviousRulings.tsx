@@ -4,7 +4,7 @@ import { useState } from "react"
 import DropdownSelector, { DropdownOption } from "./DropdownSelector"
 import VotingCard from "./VotingCard"
 
-import usePeople from "../hooks/usePeople"
+import useActivePolls from "../hooks/useActivePolls"
 import InfoBox from "./InfoBox"
 import Loader from "./Loader"
 
@@ -20,7 +20,7 @@ const DROPDOWN_OPTIONS: { [key: string]: DropdownOption } = {
 }
 
 function PreviousRulings() {
-  const { people, isLoading, isError, vote, refetch } = usePeople()
+  const { people, isLoading, isError, vote, refetch } = useActivePolls()
 
   const [alreadyVoted, setAlreadyVoted] = useState<{
     [key: string]: boolean | undefined

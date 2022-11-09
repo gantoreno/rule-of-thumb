@@ -1,6 +1,6 @@
 import { trpc } from "../utils/trpc"
 
-function usePeople() {
+function useActivePolls() {
   const query = trpc.people.useQuery()
   const vote = trpc.vote.useMutation().mutate
 
@@ -11,4 +11,4 @@ function usePeople() {
   }
 }
 
-export default usePeople
+export default useActivePolls
