@@ -9,3 +9,22 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Person {
+  id            String   @id @default(cuid())
+  index         Int      @default(autoincrement())
+  name          String
+  description   String
+  category      Category
+  picture       String
+  lastUpdated   DateTime @default(now())
+  positiveVotes Int      @default(0)
+  negativeVotes Int      @default(0)
+}
+
+enum Category {
+  ENTERTAINMENT
+  BUSINESS
+  POLITICS
+  ENVIRONMENT
+}
