@@ -10,7 +10,11 @@
     "format": "prettier --write src",
     "generate": "prisma generate",
     "migrate": "prisma migrate dev",
+    "seed": "prisma db seed",
     "prepare": "husky install"
+  },
+  "prisma": {
+    "seed": "node prisma/seeds/initialSeed.js"
   },
   "dependencies": {
     "@prisma/client": "^4.6.0",

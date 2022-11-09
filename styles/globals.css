@@ -1,6 +1,8 @@
 :root {
   --color-green-positive: 60, 187, 180;
   --color-yellow-negative: 249, 173, 29;
+  --color-dark-red: 210, 102, 102;
+  --color-darker-red: 97, 54, 54;
   --color-dark-background: rgba(0, 0, 0, 0.4);
   --color-darker-background: rgba(0, 0, 0, 0.6);
   --color-darker-gray: rgba(51, 51, 51, 1);
@@ -54,6 +56,10 @@ hr[role="separator"] {
   color: var(--color-white);
   background: var(--color-darker-background);
   border: 1px solid var(--color-white);
+}
+
+.button:disabled {
+  cursor: initial;
 }
 
 .nav {
@@ -488,6 +494,30 @@ main h2 {
   display: contents;
 }
 
+.info {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 36px;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.info.error {
+  color: rgb(var(--color-darker-red));
+  background: rgba(var(--color-dark-red));
+}
+
+.loader {
+  width: 64px;
+  height: 64px;
+  box-sizing: border-box;
+  border: 4px solid var(--color-dark-gray);
+  border-left-color: var(--color-white);
+  border-radius: 36px;
+  animation: rotate 1s linear infinite;
+  margin: 0px auto;
+}
+
 .rulings .rulings__top {
   display: block;
 }
@@ -587,6 +617,7 @@ main h2 {
   line-height: 18px;
   font-size: 15px;
   max-height: 36px;
+  max-width: 685px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -666,7 +697,7 @@ main h2 {
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
-  z-index: 10;
+  z-index: 1;
   border: none;
 }
 
@@ -871,7 +902,7 @@ main h2 {
     background: linear-gradient(
       90deg,
       rgba(0, 0, 0, 0.0001) 0%,
-      #888888 19.79%,
+      #888888 17%,
       #666666 50%,
       rgba(51, 51, 51, 0.6) 71.88%
     );
@@ -888,7 +919,7 @@ main h2 {
     .voting-card
     .voting-card__picture-container {
     aspect-ratio: initial;
-    width: 210px;
+    width: 200px;
   }
 
   .rulings
@@ -942,7 +973,8 @@ main h2 {
     .rulings__carousel.list
     .voting-card
     .voting-card__information-actions {
-    width: fit-content;
+    width: 100%;
+    max-width: 191px;
   }
 }
 
@@ -1140,5 +1172,15 @@ main h2 {
 
   hr[role="separator"] {
     margin: 2rem 0;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
   }
 }

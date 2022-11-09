@@ -1,26 +1,38 @@
+/* eslint-disable no-unused-vars */
+import { Person } from "@prisma/client"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
+import { useMemo } from "react"
 
 import Button from "./Button"
 import IconButton from "./IconButton"
 
+import { getVoteDistribution } from "../utils/votes"
+
 dayjs.extend(relativeTime)
 
 type VotingCardProps = {
-  person: {
-    name: string
-    description: string
-    category: string
-    picture: string
-    lastUpdated: string
-    votes: {
-      positive: number
-      negative: number
-    }
-  }
+  person: Person
+  onVote: (id: string, category: "positive" | "negative") => void
+  onVoteAgain: (id: string) => void
+  alreadyVoted: boolean
 }
 
-function VotingCard({ person }: VotingCardProps) {
+function VotingCard({
+  person,
+  onVote,
+  onVoteAgain,
+  alreadyVoted,
+}: VotingCardProps) {
+  const voteDistribution = useMemo(
+    () => getVoteDistribution(person.positiveVotes, person.negativeVotes),
+    [person]
+  )
+  const overallTrend = useMemo(
+    () => (person.positiveVotes > person.negativeVotes ? "up" : "down"),
+    [person]
+  )
+
   return (
     <div className="voting-card">
       <div
@@ -33,7 +45,7 @@ function VotingCard({ person }: VotingCardProps) {
           <div className="voting-card__information-overview">
             <div className="voting-card__information-title">
               <h3>{person.name}</h3>
-              <IconButton category="down" disabled />
+              <IconButton category={overallTrend} disabled />
             </div>
             <p className="voting-card__information-description">
               {person.description}
@@ -41,12 +53,34 @@ function VotingCard({ person }: VotingCardProps) {
           </div>
           <div className="voting-card__information-actions">
             <small className="voting-card__information-time">
-              {dayjs().to(dayjs(person.lastUpdated))} in {person.category}
+              {alreadyVoted ? (
+                "Thank you for your vote!"
+              ) : (
+                <>
+                  {dayjs().to(dayjs(person.lastUpdated))} in{" "}
+                  {person.category.toLocaleLowerCase()}
+                </>
+              )}
             </small>
             <div className="voting-card__information-button-group">
-              <IconButton category="up" />
-              <IconButton category="down" />
-              <Button>Vote Now</Button>
+              {!alreadyVoted && (
+                <>
+                  <IconButton
+                    category="up"
+                    onClick={() => onVote(person.id, "positive")}
+                  />
+                  <IconButton
+                    category="down"
+                    onClick={() => onVote(person.id, "negative")}
+                  />
+                </>
+              )}
+              <Button
+                onClick={() => onVoteAgain(person.id)}
+                disabled={!alreadyVoted}
+              >
+                {alreadyVoted ? "Vote Again" : "Vote Now"}
+              </Button>
             </div>
           </div>
         </div>
@@ -54,7 +88,7 @@ function VotingCard({ person }: VotingCardProps) {
       <div className="voting-card__progress">
         <div
           className="voting-card__progress-positive"
-          style={{ width: `${25}%` }}
+          style={{ width: `${voteDistribution.positives}%` }}
         >
           <img
             src="/assets/img/thumbs-up.svg"
@@ -62,13 +96,13 @@ function VotingCard({ person }: VotingCardProps) {
             width={16}
             height={16}
           />
-          25%
+          {voteDistribution.positives}%
         </div>
         <div
           className="voting-card__progress-negative"
-          style={{ width: `${75}%` }}
+          style={{ width: `${voteDistribution.negatives}%` }}
         >
-          75%
+          {voteDistribution.negatives}%
           <img
             src="/assets/img/thumbs-down.svg"
             alt="thumbs down"
