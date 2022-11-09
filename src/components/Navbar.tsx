@@ -8,7 +8,7 @@ function Navbar() {
             <path
               d="M0 0h25v4H0V0zm0 8h25v4H0V8zm0 8h25v4H0v-4z"
               fill="#FFF"
-              fill-rule="nonzero"
+              fillRule="nonzero"
             />
           </svg>
         </button>
@@ -23,7 +23,7 @@ function Navbar() {
             <a href="#">Login / Sign Up</a>
           </li>
           <li>
-            <form action="javascript:void(0)">
+            <form onSubmit={(evt) => evt.preventDefault()}>
               <input
                 className="nav__search-input"
                 aria-label="search"
