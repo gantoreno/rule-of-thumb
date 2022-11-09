@@ -19,10 +19,13 @@
     "@trpc/next": "^10.0.0-proxy-alpha.74",
     "@trpc/react": "^10.0.0-proxy-alpha.74",
     "@trpc/server": "^10.0.0-proxy-alpha.74",
+    "classnames": "^2.3.2",
+    "dayjs": "^1.11.6",
     "next": "latest",
     "prisma": "^4.6.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-use": "^17.4.0",
     "zod": "^3.0.0"
   },
   "devDependencies": {
@@ -31,8 +34,8 @@
     "@types/react-dom": "^18.0.5",
     "eslint": "^8.27.0",
     "eslint-config-next": "^13.0.2",
+    "husky": "^8.0.0",
     "prettier": "^2.7.1",
-    "typescript": "4.7.4",
-    "husky": "^8.0.0"
+    "typescript": "4.7.4"
   }
 }
