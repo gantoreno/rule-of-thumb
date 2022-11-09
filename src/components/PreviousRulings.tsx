@@ -25,7 +25,31 @@ function PreviousRulings() {
   const [alreadyVoted, setAlreadyVoted] = useState<{
     [key: string]: boolean | undefined
   }>({})
+  const [activeRequests, setActiveRequests] = useState<{
+    [key: string]: boolean | undefined
+  }>({})
   const [display, setDisplay] = useState<DropdownOption>(DROPDOWN_OPTIONS.list)
+
+  const handleVote = (id: string, category: "positive" | "negative") => {
+    setActiveRequests({ ...activeRequests, [id]: true })
+
+    vote(
+      { id, category },
+      {
+        onSuccess: () => {
+          setAlreadyVoted({ ...alreadyVoted, [id]: true })
+          refetch()
+        },
+        onSettled: () => {
+          setActiveRequests({ ...activeRequests, [id]: undefined })
+        },
+      }
+    )
+  }
+
+  const handleVoteAgain = (id: string) => {
+    setAlreadyVoted({ ...alreadyVoted, [id]: undefined })
+  }
 
   return (
     <div className="rulings" aria-label="Previous Rulings">
@@ -49,20 +73,9 @@ function PreviousRulings() {
             <VotingCard
               key={person.id}
               person={person}
-              onVote={(id, category) => {
-                vote(
-                  { id, category },
-                  {
-                    onSuccess: () => {
-                      setAlreadyVoted({ ...alreadyVoted, [id]: true })
-                      refetch()
-                    },
-                  }
-                )
-              }}
-              onVoteAgain={(id) => {
-                setAlreadyVoted({ ...alreadyVoted, [id]: undefined })
-              }}
+              onVote={handleVote}
+              onVoteAgain={handleVoteAgain}
+              disabled={Boolean(activeRequests[person.id])}
               alreadyVoted={Boolean(alreadyVoted[person.id])}
             />
           ))}
