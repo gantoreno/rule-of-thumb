@@ -48,7 +48,7 @@ $ cd rule-of-thumb
 
 Install dependencies with [Yarn](https://yarnpkg.com/):
 
-```
+```sh
 $ yarn install # or simply `yarn`
 ```
 
@@ -68,7 +68,7 @@ postgresql://<user>:<password>@<host>:<port>/<database>?schema=public
 
 After that, make sure to run the migrations by using the built-in `migrate` command from Prisma. Read more about Prisma migrations [here](https://www.prisma.io/docs/concepts/components/prisma-migrate) and `package.json` for reference.
 
-```
+```sh
 $ yarn migrate
 ```
 
