@@ -7,9 +7,9 @@ function SubmissionBanner() {
     >
       <img
         sizes="(min-width: 750px) 1440px, 100vw"
-        srcSet="assets/img/bg-people.png 750w, assets/img/bg-people.@2x.png 1440w"
+        srcSet="assets/img/bg-people.webp 750w, assets/img/bg-people.@2x.webp 1440w"
         className="banner__background"
-        src="/assets/img/bg-people.png"
+        src="/assets/img/bg-people.webp"
         alt=""
         role="none"
       />
