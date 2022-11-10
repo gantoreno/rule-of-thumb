@@ -6,7 +6,11 @@ type InfoBoxProps = {
 }
 
 function InfoBox({ type, children }: InfoBoxProps) {
-  return <div className={classNames("info", type)}>{children}</div>
+  return (
+    <div role="alert" className={classNames("info", type)}>
+      {children}
+    </div>
+  )
 }
 
 export default InfoBox

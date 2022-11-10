@@ -46,7 +46,11 @@ function DropdownSelector({ value, options, onSelect }: DropdownSelectorProps) {
       aria-expanded={isOpen}
       ref={ref}
     >
-      <button className="dropdown__option" onClick={() => setIsOpen(!isOpen)}>
+      <button
+        role="button"
+        className="dropdown__option"
+        onClick={() => setIsOpen(!isOpen)}
+      >
         {value.name}
       </button>
       {isOpen && (

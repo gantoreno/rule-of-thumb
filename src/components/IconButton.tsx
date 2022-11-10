@@ -7,6 +7,7 @@ type IconButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 function IconButton({ className, category, ...rest }: IconButtonProps) {
   return (
     <button
+      role="button"
       className={classNames("icon-button", className)}
       aria-label={`thumbs ${category}`}
       {...rest}
