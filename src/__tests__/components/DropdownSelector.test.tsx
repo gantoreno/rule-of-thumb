@@ -28,7 +28,7 @@ describe("DropdownSelector", () => {
       />
     )
 
-    fireEvent.click(screen.getByRole("button"))
+    fireEvent.click(screen.getByRole("combobox"))
     fireEvent.click(screen.getByText(/option 3/i))
 
     expect(handleSelect).toHaveBeenCalledWith(testOptions[2])
