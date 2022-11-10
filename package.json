@@ -15,7 +15,7 @@
     "seed": "prisma db seed"
   },
   "engines": {
-    "node": "18.x"
+    "node": "16.x"
   },
   "prisma": {
     "seed": "node prisma/seeds/initialSeed.js"
