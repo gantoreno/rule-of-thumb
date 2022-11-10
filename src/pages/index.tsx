@@ -15,7 +15,7 @@ function IndexPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Best public opinion hub" />
         <meta name="keyword" content="opinion, polls, media, trending, viral" />
-        <title>Rule of Thumb</title>
+        <title>Rule of Thumb &mdash; Discover, Vote, Share</title>
       </Head>
       <Navbar />
       <Header />
