@@ -5,9 +5,9 @@ function Header() {
     <header className="hero">
       <img
         className="hero__background"
-        srcSet="/assets/img/pope-francis.png 750w, assets/img/pope-francis.@2x.png 1440w"
+        srcSet="/assets/img/pope-francis.webp 750w, assets/img/pope-francis.@2x.webp 1440w"
         sizes="(min-width: 750px) 1440px, 100vw"
-        src="/assets/img/pope-francis.png"
+        src="/assets/img/pope-francis.webp"
         alt="Pope Francis"
       />
       <div className="max-centered">
@@ -24,7 +24,10 @@ function Header() {
               punishing pontiff? (thumbs up)
             </p>
             <p className="featured-card__more-info">
-              <a href="http://wikipedia.com">
+              <a
+                href="http://wikipedia.com"
+                aria-label="More about Pope Francis"
+              >
                 <svg
                   className="featured-card__more-info-icon"
                   xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +39,7 @@ function Header() {
                     fillRule="nonzero"
                   />
                 </svg>
-                More information
+                More about the Pope
               </a>
             </p>
             <p className="featured-card__cta">What&apos;s Your Veredict?</p>

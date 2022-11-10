@@ -1,6 +1,6 @@
-<center>
+<p align="center">
   <img src=".github/assets/ruleofthumb.png" />
-</center>
+</p>
 
 [![Test](https://github.com/gantoreno/rule-of-thumb/actions/workflows/test.yml/badge.svg)](https://github.com/gantoreno/rule-of-thumb/actions/workflows/test.yml) ![Vercel](https://vercelbadge.vercel.app/api/gantoreno/rule-of-thumb)
 
@@ -129,6 +129,14 @@ A Cypress instance should launch and the automated browser should prompt you for
 <img src=".github/assets/e2e.png" />
 
 All tests should pass smoothly, as shown on above's picture.
+
+### Performance
+
+Ever seen [Lighthouse](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk?hl=es)? You'll be happy to see that Rule of Thumb™️ scores a solid 100 on each and every section.
+
+<img src=".github/assets/lighthouse.png" />
+
+This is made possible by ensuring proper accessibility principles (such as `aria` attributes and semantic HTML along with good SEO) as well as very solid optimization techniques (such as image compression and `webp` formats).
 
 ## Considerations
 

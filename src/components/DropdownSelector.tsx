@@ -1,6 +1,6 @@
 import classNames from "classnames"
 import { useClickAway } from "react-use"
-import { useRef, useState } from "react"
+import { useId, useRef, useState } from "react"
 
 export type DropdownOption = {
   name: string
@@ -16,6 +16,7 @@ type DropdownSelectorProps = {
 
 function DropdownSelector({ value, options, onSelect }: DropdownSelectorProps) {
   const ref = useRef(null)
+  const id = useId()
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -42,30 +43,27 @@ function DropdownSelector({ value, options, onSelect }: DropdownSelectorProps) {
       className={classNames("dropdown", {
         open: isOpen,
       })}
-      aria-haspopup="listbox"
-      aria-expanded={isOpen}
       ref={ref}
     >
       <button
-        role="button"
+        aria-label="Select list style"
+        role="combobox"
+        aria-expanded={isOpen}
+        aria-controls={id}
+        aria-haspopup="listbox"
+        tabIndex={0}
         className="dropdown__option"
         onClick={() => setIsOpen(!isOpen)}
       >
         {value.name}
       </button>
       {isOpen && (
-        <ul
-          className="dropdown__options"
-          role="listbox"
-          aria-activedescendant={value.value}
-          tabIndex={-1}
-        >
+        <ul id={id} role="listbox" tabIndex={-1} className="dropdown__options">
           {options.map((option) => (
             <li
               key={option.value}
               role="option"
               aria-selected={option.value == value.value}
-              tabIndex={0}
               className={classNames("dropdown__option", {
                 "dropdown__option-selected": option.value === value.value,
               })}
